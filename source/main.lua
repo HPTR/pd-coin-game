@@ -95,4 +95,5 @@ function playdate.update()
 
 	-- Draws timer - text, time remaining, x and y coords
 	gfx.drawText("Time: " .. math.ceil(playTimer.value / 1000), 5, 5)
+	gfx.drawText("Score: " .. score, 320, 5)
 end

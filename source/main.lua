@@ -3,12 +3,16 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
-local playerSprite = nil
 local gfx <const> = playdate.graphics
+
+local playerSprite = nil
 local playerSpeed = 4
+
 local playTimer = nil
 local playTime = 30 * 1000
+
 local coinSprite = nil
+local score = 0
 
 -- Timer function
 local function resetTimer()

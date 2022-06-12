@@ -59,7 +59,12 @@ function playdate.update()
 
 	if playdate.buttonIsPressed(playdate.kButtonLeft) then
 		playerSprite:moveBy(-playerSpeed, 0)
+		end
 	end
 
+	playdate.timer.updateTimers()
 	gfx.sprite.update()
+
+	-- Draws timer - text, time remaining, x and y coords
+	gfx.drawText("Time: " .. math.ceil(playTimer.value / 1000), 5, 5)
 end

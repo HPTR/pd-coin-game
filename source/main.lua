@@ -32,11 +32,13 @@ local function initialise()
 	local playerImage = gfx.image.new("images/player")
 	playerSprite = gfx.sprite.new(playerImage)
 	playerSprite:moveTo(200, 120)
+	playerSprite:setCollideRect(0, 0, playerSprite:getSize())
 	playerSprite:add()
 
 	local coinImage = gfx.image.new("images/coin")
 	coinSprite = gfx.sprite.new(coinImage)
 	moveCoin()
+	coinSprite:setCollideRect(0, 0, coinSprite:getSize())
 	coinSprite:add()
 
 	-- Adds background to edge of screen

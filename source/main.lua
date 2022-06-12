@@ -27,7 +27,7 @@ local function moveCoin()
 end
 
 local function initialise()
-	math.randomseed(playdate.geSecondsSinceEpoch())
+	math.randomseed(playdate.getSecondsSinceEpoch())
 	-- Adds player sprite to middle of screen
 	local playerImage = gfx.image.new("images/player")
 	playerSprite = gfx.sprite.new(playerImage)
@@ -62,6 +62,7 @@ function playdate.update()
 		if playdate.buttonIsPressed(playdate.kButtonA) then
 			resetTimer()
 			moveCoin()
+			score = 0
 		end
 	else
 		-- These 4 if statements handle movement, change speed by changing playerSpeed variable
@@ -79,6 +80,13 @@ function playdate.update()
 
 		if playdate.buttonIsPressed(playdate.kButtonLeft) then
 			playerSprite:moveBy(-playerSpeed, 0)
+		end
+
+		-- Creates a list of sprites overlapping the coin, if anything is (can only be player), move the coin
+		local collisions = coinSprite:overlappingSprites()
+		if #collisions >= 1 then
+			moveCoin()
+			score += 1
 		end
 	end
 

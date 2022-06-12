@@ -6,6 +6,13 @@ import "CoreLibs/timer"
 local playerSprite = nil
 local gfx <const> = playdate.graphics
 local playerSpeed = 4
+local playTimer = nil
+local playTime = 30 * 1000
+
+-- Timer function
+local function resetTimer()
+	playTimer = playdate.timer.new(playTime, playTime, 0, playdate.easingFunctions.linear)
+end
 
 local function initialise()
 	-- Adds player sprite to middle of screen
@@ -23,11 +30,20 @@ local function initialise()
 			gfx.clearClipRect()
 		end
 	)
+
+	resetTimer()
 end
 
 initialise()
 
 function playdate.update()
+	-- If timer is 0, movement will not be processed. Pressing A will reset the timer
+	if playTimer.value == 0 then
+		if playdate.buttonIsPressed(playdate.kButtonA) then
+			resetTimer()
+			moveCoin()
+		end
+	else
 	-- These 4 if statements handle movement, change speed by changing playerSpeed variable
 	if playdate.buttonIsPressed(playdate.kButtonUp) then
 		playerSprite:moveBy(0, -playerSpeed)
